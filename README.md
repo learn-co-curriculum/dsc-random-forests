@@ -34,18 +34,18 @@ Training each tree on it's own individual "bag" of data is a great start for get
 
 ## The Subspace Sampling Method
 
-After bagging the data, the Random Forest uses the **_Subspace Sampling Method_** to further increase variability between the trees in the Random Forest. Although it has a fancy mathematical-sounding name, the Subspace Sampling Method refers to randomly selecting a subset of features to use as predictors for training a decision tree, instead of using all predictors available. 
+After bagging the data, the Random Forest uses the **_Subspace Sampling Method_** to further increase variability between the trees in the Random Forest. Although it has a fancy mathematical-sounding name, the Subspace Sampling Method refers to randomly selecting a subset of features to use as predictors for each node when training a decision tree, instead of using all predictors available at each node. 
 
-Let's pretend we're training our Random Forest on a dataset with 3000 rows, and 10 columns. For each given tree, we would randomly "bag" 2000 rows with replacement. Next, we subspace sample by randomly selecting a number of predictors. Exactly how many predictors are used is a tunable parameter for this algorithm--for simplicity's sake, let's assume we pick 6 predictors in this example. 
+Let's pretend we're training our Random Forest on a dataset with 3000 rows, and 10 columns. For each given tree, we would randomly "bag" 2000 rows with replacement. Next, we subspace sample by randomly selecting a number of predictors at each node of a decision tree. Exactly how many predictors are used is a tunable parameter for this algorithm--for simplicity's sake, let's assume we pick 6 predictors in this example. 
 
 This brings us to the following pseudocode so far:
 
 For each tree in the dataset:
 
 1. Bag 2/3 of the overall data--in our example, 2000 rows.
-2. Randomly select a set number of features to use for training this particular tree--in this example, 6 features. 
+2. Randomly select a set number of features to use for training each node within this--in this example, 6 features. 
 3. Train the tree on modified dataset, which is now a DataFrame consisting of 2000 rows and 6 columns. 
-4. Drop the unused columns from step 3 from the Out-Of-Bag rows that weren't bagged in step 2, and then use this as an internal testing set to calculate the Out-Of-Bag Error for this particular tree.
+4. Drop the unused columns from step 3 from the Out-Of-Bag rows that weren't bagged in step 1, and then use this as an internal testing set to calculate the Out-Of-Bag Error for this particular tree.
 
 <img src='rf-diagram.png' height=75% width=75%>
 
@@ -55,7 +55,7 @@ Once we've created our target number of trees, we'll be left with Random Forest 
 
 To understand why this is the case, let's put it in practical terms. Let's assume that of the 10 columns that we mentioned in our hypothetical dataset, column 2 correlates heavily with our target. However, there is still some noise in this dataset, and this column doesn't correlate _perfectly_ with our target--there will times where it suggests one class or another, but this isn't actually the case--let's call these rows "false signals". In the case of a single decision tree, or even a forest where all trees focus on all the same predictors, we can expect to get the model to almost always get these false signal examples wrong. Why? Because the model will have learned to treat column 2 as a "star player" of sorts. When column 2 provides false signal, our models will fall for it, and get the prediction wrong. 
 
-Now, let's assume that we have a Random Forest, complete with Subspace Sampling. If we randomly select 6 out of 10 predictors to use when creating each tree, then this means that ~40% of the trees in our forest won't even know Column 2 exists! In the cases where Column 2 provides "false signal", the trees that use column 2 will likely make an incorrect prediction--but that only matters to the ~60% that look at Column 2. Our forest still contains another 40% of trees that are essentially "immune" to the false signal in Column 2, because they don't use that predictor. In this way, the "wisdom of the crowd" buffers the performance of every constituent in that crowd. Although for any given example, some trees may draw the wrong conclusion from a particular predictor, the odds that _every tree_ makes the same mistake because they looked at the same predictor is infinitesimally small!
+Now, let's assume that we have a Random Forest, complete with Subspace Sampling. If we randomly select 6 out of 10 predictors to use when creating each node of each tree, then this means that ~40% of the nodes of the trees in our forest won't even know Column 2 exists! In the cases where Column 2 provides "false signal", the nodes of trees that use column 2 will likely make an incorrect prediction--but that only matters to the ~60% that look at Column 2. Our forest still contains another 40% of nodes within trees that are essentially "immune" to the false signal in Column 2, because they don't use that predictor. In this way, the "wisdom of the crowd" buffers the performance of every constituent in that crowd. Although for any given example, some trees may draw the wrong conclusion from a particular predictor, the odds that _every tree_ makes the same mistake because they looked at the same predictor is infinitesimally small!
 
 ### Making Predictions With Random Forests
 
