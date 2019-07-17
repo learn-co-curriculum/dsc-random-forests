@@ -47,7 +47,7 @@ For each tree in the dataset:
 3. Train the tree on modified dataset, which is now a DataFrame consisting of 2000 rows and 6 columns. 
 4. Drop the unused columns from step 3 from the Out-Of-Bag rows that weren't bagged in step 1, and then use this as an internal testing set to calculate the Out-Of-Bag Error for this particular tree.
 
-<img src='images/rf-diagram.png' width="500">
+<img src='images/new_rf-diagram.png' width="750">
 
 ### Resiliency to Overfitting
 
@@ -92,3 +92,8 @@ Although not strictly necessary for understanding how to use Random Forests, we 
 
 In this lesson, you learned about a random forest, which is a powerful and popular ensemble method that uses decision trees!
 
+
+
+```python
+
+```
