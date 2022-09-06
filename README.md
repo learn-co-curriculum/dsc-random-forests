@@ -48,7 +48,7 @@ For each tree in the dataset:
 3. Train the tree on the modified dataset, which is now a DataFrame consisting of 2000 rows and 6 columns  
 4. Drop the unused columns from step 3 from the out-of-bag rows that weren't bagged in step 1, and then use this as an internal testing set to calculate the out-of-bag error for this particular tree 
 
-<img src='images/new_rf-diagram.png' width="750">
+<img src='https://raw.github.com/learn-co-curriculum/dsc-random-forests/images/new_rf-diagram.png' width="750">
 
 ### Resiliency to overfitting
 
