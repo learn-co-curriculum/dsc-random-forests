@@ -24,7 +24,7 @@ Put simply, the random forest algorithm is an ensemble of decision trees. Howeve
 
 Think about this from a business perspective -- would you rather have a team at your disposal where everyone has exactly the same training and skills, or a team where each member has their own individual strengths and weaknesses? The second team will almost always do much better!
 
-As we learned when reading up on ensemble methods, variance is a good thing in any ensemble. So how do we create high variance among all the trees in our random forest? The answer lies in two clever techniques that the algorithm uses to make sure that each tree focuses on different things -- **_Bagging_** and the **_Subspace Sampling Method_**.
+Variance is potentially a good thing with ensembles. So how do we create high variance among all the trees in our random forest? The answer lies in two clever techniques that the algorithm uses to make sure that each tree focuses on different things -- **_Bagging_** and the **_Subspace Sampling Method_**.
 
 
 ## Bagging
