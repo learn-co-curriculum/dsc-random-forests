@@ -1,4 +1,3 @@
-
 # Random Forests
 
 
@@ -24,7 +23,7 @@ Put simply, the random forest algorithm is an ensemble of decision trees. Howeve
 
 Think about this from a business perspective -- would you rather have a team at your disposal where everyone has exactly the same training and skills, or a team where each member has their own individual strengths and weaknesses? The second team will almost always do much better!
 
-Variance is potentially a good thing with ensembles. So how do we create high variance among all the trees in our random forest? The answer lies in two clever techniques that the algorithm uses to make sure that each tree focuses on different things -- **_Bagging_** and the **_Subspace Sampling Method_**.
+As we learned when reading up on ensemble methods, variance is a good thing in any ensemble. So how do we create high variance among all the trees in our random forest? The answer lies in two clever techniques that the algorithm uses to make sure that each tree focuses on different things -- **_Bagging_** and the **_Subspace Sampling Method_**.
 
 
 ## Bagging
@@ -48,7 +47,7 @@ For each tree in the dataset:
 3. Train the tree on the modified dataset, which is now a DataFrame consisting of 2000 rows and 6 columns  
 4. Drop the unused columns from step 3 from the out-of-bag rows that weren't bagged in step 1, and then use this as an internal testing set to calculate the out-of-bag error for this particular tree 
 
-<img src='https://raw.github.com/learn-co-curriculum/dsc-random-forests/master/images/new_rf-diagram.png' width="750">
+<img src='https://curriculum-content.s3.amazonaws.com/data-science/images/new_rf-diagram.png' width="750">
 
 ### Resiliency to overfitting
 
